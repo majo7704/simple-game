@@ -100,7 +100,7 @@ const stopTheGame = function () {
   displayGameOverMessage();
   // needs to be completed in task 4...
 }
-
+const Two_Minutes = 1000 * 60 * 2;
 
 // get the stop button and bind a click event that can stop the game
 let stopButton = document.getElementById('stop');
@@ -108,4 +108,7 @@ stopButton.addEventListener('click', stopTheGame);
 
 
 // start the game!  Needs to be replaced in task 2.
-displayARandomButton();
+setInterval(nextGo, 1000);
+
+//stop the game after two minutes (1000 * 60 * 2)milisecond
+setTimeOut(stopTheGame, Two_Minutes);
