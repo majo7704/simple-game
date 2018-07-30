@@ -32,7 +32,7 @@ const addOneToScore = function (event) {
 const displayARandomButton = function () {
   let button = getRandomButton();
   button.className = 'button flash visible';
-}
+};
 
 // This function returns a random button from the NodeList of buttons.
 // It uses Math.random() to do this, which you can read about on MDN
@@ -89,26 +89,34 @@ const hideTheVisibleButton = function () {
 
 // Used to start a new game
 const startTheGame = function () {
-  resetScore();
-  hideGameOverMessage();
-  // needs to be completed in task 5...
+  if (gameIdentifier < 1) {
+    resetScore();
+    hideGameOverMessage();
+    // needs to be completed in task 5...
+    gameIdentifier = setInterval(nextGo, 1000);
+  }
 }
+let startButton = document.getElementById('start');
+startButton.addEventListener('click', startTheGame);
 
 
 // Used to stop the current game
 const stopTheGame = function () {
   displayGameOverMessage();
   // needs to be completed in task 4...
+  clearInterval(gameIdentifier);
+  gameIdentifier = 0;
 }
-const Two_Minutes = 1000 * 60 * 2;
+
 
 // get the stop button and bind a click event that can stop the game
 let stopButton = document.getElementById('stop');
 stopButton.addEventListener('click', stopTheGame);
 
+const Two_Minutes = 1000 * 60 * 2;
 
 // start the game!  Needs to be replaced in task 2.
-setInterval(nextGo, 1000);
+let gameIdentifier = setInterval(nextGo, 1000);
 
 //stop the game after two minutes (1000 * 60 * 2)milisecond
 setTimeOut(stopTheGame, Two_Minutes);
